@@ -8,11 +8,12 @@ import time
 start_time = None
 total_records = 0
 app = Celery('celery_batch', 
-             broker='amqp://guest:guest@127.0.0.1:5672//',
+             broker='amqp://guest:guest@127.0.0.1:5672/',
              backend="rpc://127.0.0.1:6379")
 
 # Enable retrying connections on startup
 app.conf.broker_connection_retry_on_startup = True
+
 
 @shared_task
 def reader():
@@ -44,5 +45,5 @@ def writer(processed_data):
         total_time = end_time - start_time
         print(f"************ Total time for processing: {total_time} seconds")
     total_records = total_records + 1 
-    
-     
+
+
