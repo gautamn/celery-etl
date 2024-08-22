@@ -19,7 +19,7 @@ services:
     depends_on:
       - rabbitmq
     environment:
-      - CELERY_BROKER_URL=amqp://guest:guest@127.0.0.1:5672/
+      - CELERY_BROKER_URL=amqp://guest:guest@127.0.0.1:5672/celery_vhost/
       - CELERY_RESULT_BACKEND=rpc://127.0.0.1:6379
 
   client:
@@ -30,5 +30,5 @@ services:
     depends_on:
       - celery
     environment:
-      - CELERY_BROKER_URL=amqp://guest:guest@127.0.0.1:5672/
+      - CELERY_BROKER_URL=amqp://guest:guest@127.0.0.1:5672/celery_vhost/
       - CELERY_RESULT_BACKEND=rpc://127.0.0.1:6379
