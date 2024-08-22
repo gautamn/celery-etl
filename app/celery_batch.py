@@ -43,4 +43,5 @@ def writer(processed_data):
         end_time = time.time()  # Record end time when the last chunk is written
         total_time = end_time - start_time
         print(f"************ Total time for processing: {total_time} seconds")
-    total_records = total_records + 1    
+    total_records = total_records + 1  
+      

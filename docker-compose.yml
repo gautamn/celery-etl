@@ -3,7 +3,7 @@ version: '2.28.1'
 services:
   rabbitmq:
     image: rabbitmq:3-management
-    container_name: rabbitmq
+    container_name: rabbitmq-celery
     ports:
       - "5672:5672"   # RabbitMQ port
       - "15672:15672" # Management UI
