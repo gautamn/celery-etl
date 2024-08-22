@@ -5,8 +5,8 @@ services:
     image: rabbitmq:3-management
     container_name: rabbitmq-celerydemo
     ports:
-      - "5672:5673"   # RabbitMQ port
-      - "15672:15673" # Management UI
+      - "5673:5673"   # RabbitMQ port
+      - "15673:15673" # Management UI
     environment:
       RABBITMQ_DEFAULT_USER: guest
       RABBITMQ_DEFAULT_PASS: guest
