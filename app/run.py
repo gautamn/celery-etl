@@ -1,5 +1,5 @@
 from celery import chain
-from app.celery_batch import reader
+from celery_batch import reader
 def run_batch():
     reader.delay()
 

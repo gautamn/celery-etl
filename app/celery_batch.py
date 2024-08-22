@@ -40,7 +40,7 @@ def processor(data):
 def writer(processed_data):
     global total_records
     print(f"Writer received: {processed_data}")
-    if total_records is 5:
+    if total_records == 5:
         end_time = time.time()  # Record end time when the last chunk is written
         total_time = end_time - start_time
         print(f"************ Total time for processing: {total_time} seconds")
