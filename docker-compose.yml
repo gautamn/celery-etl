@@ -1,25 +1,25 @@
 version: '2.28.1'
 
-services:
-  rabbitmq:
-    image: rabbitmq:3-management
-    container_name: rabbitmq-celerydemo
-    ports:
-      - "5673:5673"   # RabbitMQ port
-      - "15673:15673" # Management UI
-    environment:
-      RABBITMQ_DEFAULT_USER: guest
-      RABBITMQ_DEFAULT_PASS: guest
+# services:
+#   rabbitmq:
+#     image: rabbitmq:3-management
+#     container_name: rabbitmq-celerydemo
+#     ports:
+#       - "5673:5673"   # RabbitMQ port
+#       - "15673:15673" # Management UI
+#     environment:
+#       RABBITMQ_DEFAULT_USER: guest
+#       RABBITMQ_DEFAULT_PASS: guest
 
   celery:
     build:
       context: ./app
     container_name: celery-celerydemo
     command: celery -A celery_batch worker --concurrency=1 --loglevel=info -P eventlet
-    depends_on:
-      - rabbitmq
+    # depends_on:
+    #   - rabbitmq
     environment:
-      - CELERY_BROKER_URL=amqp://guest:guest@10.150.10.17:5673/celery_vhost
+      - CELERY_BROKER_URL=amqp://guest:guest@10.150.10.17:5672/celery_vhost
       - CELERY_RESULT_BACKEND=rpc://127.0.0.1:6379
 
   client:
@@ -30,5 +30,5 @@ services:
     depends_on:
       - celery
     environment:
-      - CELERY_BROKER_URL=amqp://guest:guest@10.150.10.17:5673/celery_vhost
+      - CELERY_BROKER_URL=amqp://guest:guest@10.150.10.17:5672/celery_vhost
       - CELERY_RESULT_BACKEND=rpc://127.0.0.1:6379
