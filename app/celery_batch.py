@@ -8,7 +8,7 @@ import time
 start_time = None
 total_records = 0
 app = Celery('celery_batch', 
-             broker='amqp://guest:guest@54.85.40.192:5672/celery_vhost',
+             broker='amqp://guest:guest@127.0.0.1:5672/celery_vhost',
              backend="rpc://127.0.0.1:6379")
 
 # Enable retrying connections on startup
@@ -27,14 +27,12 @@ def reader():
         value = ''.join(random.choices(string.ascii_lowercase + string.digits, k=8))
         data = {"key": value}
         print(f"Reader output: {data}")
-        #return data  # This will be passed to processor
         processor.apply_async((data,))
 
 @shared_task
 def processor(data):
     processed_data = data['key'].upper()
     print(f"Processor received: {data}, Processor output: {processed_data}")
-    #return processed_data  # This will be passed to writer
     writer.apply_async((processed_data,))
 
 @shared_task
@@ -46,5 +44,3 @@ def writer(processed_data):
         total_time = end_time - start_time
         print(f"************ Total time for processing: {total_time} seconds")
     total_records = total_records + 1    
-
-    #return f"Final result: {processed_data}"

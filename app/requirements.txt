@@ -1,0 +1,3 @@
+eventlet
+celery
+pika  # for RabbitMQ
