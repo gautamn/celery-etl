@@ -8,7 +8,7 @@ import time
 start_time = None
 total_records = 0
 app = Celery('celery_batch', 
-             broker='amqp://guest:guest@127.0.0.1:5672/celery_vhost',
+             broker='amqp://guest:guest@127.0.0.1:5672//',
              backend="rpc://127.0.0.1:6379")
 
 # Enable retrying connections on startup
@@ -43,5 +43,6 @@ def writer(processed_data):
         end_time = time.time()  # Record end time when the last chunk is written
         total_time = end_time - start_time
         print(f"************ Total time for processing: {total_time} seconds")
-    total_records = total_records + 1  
-      
+    total_records = total_records + 1 
+    
+     
