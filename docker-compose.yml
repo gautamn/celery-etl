@@ -3,7 +3,7 @@ version: '2.28.1'
 services:
   rabbitmq:
     image: rabbitmq:3-management
-    container_name: rabbitmq-celery
+    container_name: rabbitmq-celerydemo
     ports:
       - "5672:5672"   # RabbitMQ port
       - "15672:15672" # Management UI
@@ -14,7 +14,7 @@ services:
   celery:
     build:
       context: ./app
-    container_name: celery
+    container_name: celery-celerydemo
     command: celery -A celery_batch worker --concurrency=1 --loglevel=info -P eventlet
     depends_on:
       - rabbitmq
@@ -25,7 +25,7 @@ services:
   client:
     build:
       context: ./app
-    container_name: client
+    container_name: client-celerydemo
     command: python run.py
     depends_on:
       - celery
