@@ -5,8 +5,8 @@ services:
     image: rabbitmq:3-management
     container_name: rabbitmq-celerydemo
     ports:
-      - "5672:5672"   # RabbitMQ port
-      - "15672:15672" # Management UI
+      - "5672:5673"   # RabbitMQ port
+      - "15672:15673" # Management UI
     environment:
       RABBITMQ_DEFAULT_USER: guest
       RABBITMQ_DEFAULT_PASS: guest
@@ -19,7 +19,7 @@ services:
     depends_on:
       - rabbitmq
     environment:
-      - CELERY_BROKER_URL=amqp://guest:guest@10.150.10.17:5672/celery_vhost
+      - CELERY_BROKER_URL=amqp://guest:guest@10.150.10.17:5673/celery_vhost
       - CELERY_RESULT_BACKEND=rpc://127.0.0.1:6379
 
   client:
@@ -30,5 +30,5 @@ services:
     depends_on:
       - celery
     environment:
-      - CELERY_BROKER_URL=amqp://guest:guest@10.150.10.17:5672/celery_vhost
+      - CELERY_BROKER_URL=amqp://guest:guest@10.150.10.17:5673/celery_vhost
       - CELERY_RESULT_BACKEND=rpc://127.0.0.1:6379

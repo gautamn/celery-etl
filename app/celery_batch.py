@@ -8,7 +8,7 @@ import time
 start_time = None
 total_records = 0
 app = Celery('celery_batch', 
-             broker='amqp://guest:guest@10.150.10.17:5672/celery_vhost',
+             broker='amqp://guest:guest@10.150.10.17:5673/celery_vhost',
              backend="rpc://127.0.0.1:6379")
 
 # Enable retrying connections on startup
