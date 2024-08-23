@@ -7,7 +7,7 @@ services:
     container_name: celery-celerydemo
     command: celery -A celery_batch worker --concurrency=1 --loglevel=info -P eventlet
     environment:
-      - CELERY_BROKER_URL=amqp://guest:guest@10.150.10.17:5672/celery_vhost
+      - CELERY_BROKER_URL=amqp://guest:guest@10.150.10.219:5672/celery_vhost
       - CELERY_RESULT_BACKEND=rpc://
 
   client:
@@ -18,5 +18,5 @@ services:
     depends_on:
       - celery
     environment:
-      - CELERY_BROKER_URL=amqp://guest:guest@10.150.10.17:5672/celery_vhost
+      - CELERY_BROKER_URL=amqp://guest:guest@10.150.10.219:5672/celery_vhost
       - CELERY_RESULT_BACKEND=rpc://
