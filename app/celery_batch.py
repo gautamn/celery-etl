@@ -38,12 +38,31 @@ def processor(data):
 
 @shared_task
 def writer(processed_data):
-    global total_records
+    global total_records, start_time
+
+    if processed_data is None:
+        print("Warning: Received 'None' for processed_data!")
+        return
+
     print(f"Writer received: {processed_data}")
+
+    # Example of saving processed_data to Redis or another backend
+    # (Assuming you have a Redis client set up and connected)
+    # redis_client.set(f"processed_data_{total_records}", processed_data)
+
+    # Increment the total_records counter
+    total_records += 1
+
     if total_records == 5:
         end_time = time.time()  # Record end time when the last chunk is written
         total_time = end_time - start_time
         print(f"************ Total time for processing: {total_time} seconds")
-    total_records = total_records + 1 
+
+        # Reset total_records if needed
+        total_records = 0
+
+    # Return processed_data to be stored in the backend, if required
+    return processed_data
+ 
 
 

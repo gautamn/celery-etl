@@ -1,7 +1,7 @@
 import pika
 
 credentials = pika.PlainCredentials('guest', 'guest')
-parameters = pika.ConnectionParameters('10.150.10.17', 5672, 'celery_vhost', credentials)
+parameters = pika.ConnectionParameters('3.85.11.138', 5672, 'celery_vhost', credentials)
 
 try:
     connection = pika.BlockingConnection(parameters)
