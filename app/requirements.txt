@@ -1,3 +1,4 @@
 eventlet
 celery
 pika  # for RabbitMQ
+redis
