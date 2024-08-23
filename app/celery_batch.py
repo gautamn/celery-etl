@@ -9,7 +9,7 @@ start_time = None
 total_records = 0
 app = Celery('celery_batch', 
              broker='amqp://guest:guest@50.16.123.194:5672/celery_vhost',
-             backend="redis://34.230.13.15:6379/0")
+             backend="redis://50.16.123.194:6379/0")
 
 # Enable retrying connections on startup
 app.conf.broker_connection_retry_on_startup = True

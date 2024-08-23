@@ -8,15 +8,15 @@ services:
     command: celery -A celery_batch worker --concurrency=1 --loglevel=info -P eventlet
     environment:
       - CELERY_BROKER_URL=amqp://guest:guest@10.150.10.219:5672/celery_vhost
-      - CELERY_RESULT_BACKEND=rpc://
+      - CELERY_RESULT_BACKEND=redis://50.16.123.194:6379/0
 
-  client:
-    build:
-      context: ./app
-    container_name: client-celerydemo
-    command: python run.py
-    depends_on:
-      - celery
-    environment:
-      - CELERY_BROKER_URL=amqp://guest:guest@10.150.10.219:5672/celery_vhost
-      - CELERY_RESULT_BACKEND=rpc://
+  # client:
+  #   build:
+  #     context: ./app
+  #   container_name: client-celerydemo
+  #   command: python run.py
+  #   depends_on:
+  #     - celery
+  #   environment:
+  #     - CELERY_BROKER_URL=amqp://guest:guest@10.150.10.219:5672/celery_vhost
+  #     - CELERY_RESULT_BACKEND=rpc://
